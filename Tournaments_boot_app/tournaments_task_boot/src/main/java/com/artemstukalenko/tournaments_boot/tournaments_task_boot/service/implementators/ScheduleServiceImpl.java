@@ -38,7 +38,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public boolean deleteScheduleById(int scheduleId) {
-        scheduleRepository.getById(scheduleId);
+        scheduleRepository.findById(scheduleId);
         return true;
     }
 }
