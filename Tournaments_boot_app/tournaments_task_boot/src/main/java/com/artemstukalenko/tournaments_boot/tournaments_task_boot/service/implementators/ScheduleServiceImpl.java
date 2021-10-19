@@ -1,8 +1,9 @@
 package com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.implementators;
 
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.repositories.ScheduleRepository;
+import com.artemstukalenko.tournaments_boot.tournaments_task_boot.schedule.Schedule;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.ScheduleService;
-import entity.Schedule;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

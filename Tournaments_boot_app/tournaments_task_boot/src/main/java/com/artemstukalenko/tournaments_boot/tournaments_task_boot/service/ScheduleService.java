@@ -1,6 +1,8 @@
 package com.artemstukalenko.tournaments_boot.tournaments_task_boot.service;
 
-import entity.Schedule;
+
+
+import com.artemstukalenko.tournaments_boot.tournaments_task_boot.schedule.Schedule;
 
 import java.util.List;
 

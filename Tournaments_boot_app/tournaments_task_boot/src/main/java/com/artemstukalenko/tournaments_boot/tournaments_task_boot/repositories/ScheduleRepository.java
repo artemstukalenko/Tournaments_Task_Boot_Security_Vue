@@ -1,7 +1,8 @@
 package com.artemstukalenko.tournaments_boot.tournaments_task_boot.repositories;
 
-import entity.Schedule;
+
 //import org.springframework.data.jpa.repository.JpaRepository;
+import com.artemstukalenko.tournaments_boot.tournaments_task_boot.schedule.Schedule;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.MongoRepository;

@@ -1,9 +1,10 @@
 package com.artemstukalenko.tournaments_boot.tournaments_task_boot.controller;
 
+import com.artemstukalenko.tournaments_boot.tournaments_task_boot.schedule.Schedule;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.ScheduleService;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.TeamService;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.TournamentService;
-import entity.Schedule;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
