@@ -1,15 +1,17 @@
 package com.artemstukalenko.tournaments_boot.tournaments_task_boot.controller;
 
-import entity.Tournament;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class TestController {
+public class MainController {
 
     @RequestMapping("/")
-    public String testPage() {
+    public String getHomepage(Model model) {
+
         return "homepage-with-bootstrap.html";
+
     }
 
 }
