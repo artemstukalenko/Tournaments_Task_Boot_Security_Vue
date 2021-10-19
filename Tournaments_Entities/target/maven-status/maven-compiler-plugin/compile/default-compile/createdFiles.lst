@@ -1,0 +1,8 @@
+entity\Tournament.class
+entity\User.class
+entity\Schedule.class
+entity\Team.class
+entity\AppEntity.class
+entity\TeamPlayer.class
+entity\Player.class
+entity\UserRole.class
