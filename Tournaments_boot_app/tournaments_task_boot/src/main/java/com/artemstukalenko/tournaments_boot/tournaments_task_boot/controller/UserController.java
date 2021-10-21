@@ -41,7 +41,7 @@ public class UserController {
 
         user.setUserRole(userRoleService.findRoleById(user.getUserRole().getRoleId()));
 
-        userService.addOrUpdateUser(user);
+        userService.addOrUpdate(user);
 
         return "forward:/users/";
     }

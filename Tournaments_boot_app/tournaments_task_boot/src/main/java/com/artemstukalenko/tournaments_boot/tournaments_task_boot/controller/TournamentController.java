@@ -49,7 +49,7 @@ public class TournamentController {
 
         tournament.setUser(userService.findUserById(tournament.getUser().getUserId()));
 
-        tournamentService.addOrUpdateTournament(tournament);
+        tournamentService.addOrUpdate(tournament);
 
         return "forward:/tournaments/";
     }

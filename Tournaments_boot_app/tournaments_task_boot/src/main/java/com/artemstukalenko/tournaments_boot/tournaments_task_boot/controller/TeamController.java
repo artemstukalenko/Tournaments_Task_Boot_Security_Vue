@@ -39,7 +39,7 @@ public class TeamController {
     @RequestMapping("/commitTeam")
     public String commitTeam(Team team) {
 
-        teamService.addOrUpdateTeam(team);
+        teamService.addOrUpdate(team);
 
         return "forward:/teams/";
     }

@@ -5,6 +5,7 @@ import com.artemstukalenko.tournaments_boot.tournaments_task_boot.repositories.T
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.schedule.Schedule;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.TournamentService;
 import entity.Tournament;
+import org.aspectj.lang.annotation.After;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +37,7 @@ public class TournamentServiceImpl implements TournamentService {
     }
 
     @Override
-    public boolean addOrUpdateTournament(Tournament tournamentToAdd) {
+    public boolean addOrUpdate(Tournament tournamentToAdd) {
         tournamentRepository.save(tournamentToAdd);
 
         Schedule scheduleLinkedToThisTournament = scheduleRepository.findScheduleByTournamentId(tournamentToAdd.getTournamentId());

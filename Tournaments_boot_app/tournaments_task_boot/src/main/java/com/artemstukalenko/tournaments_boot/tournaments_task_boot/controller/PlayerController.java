@@ -41,7 +41,7 @@ public class PlayerController {
 
         player.setUser(userService.findUserById(player.getUser().getUserId()));
 
-        playerService.addOrUpdatePlayer(player);
+        playerService.addOrUpdate(player);
 
         return "forward:/players/";
     }

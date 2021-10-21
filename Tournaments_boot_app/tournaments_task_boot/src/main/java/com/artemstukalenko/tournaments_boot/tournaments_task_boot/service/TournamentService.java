@@ -10,7 +10,7 @@ public interface TournamentService {
 
     Tournament findTournamentById(int tournamentId);
 
-    boolean addOrUpdateTournament(Tournament tournamentToAdd);
+    boolean addOrUpdate(Tournament tournamentToAdd);
 
     boolean deleteTournamentById(int tournamentId);
 

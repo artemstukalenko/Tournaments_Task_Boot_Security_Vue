@@ -8,7 +8,7 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    boolean addOrUpdateUser(User userToAdd);
+    boolean addOrUpdate(User userToAdd);
 
     boolean deleteUserById(int userId);
 

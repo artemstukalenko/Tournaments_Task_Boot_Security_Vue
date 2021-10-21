@@ -31,7 +31,7 @@ public class TeamPlayerServiceImpl implements TeamPlayerService {
     }
 
     @Override
-    public boolean addOrUpdateTeamPlayer(TeamPlayer teamPlayerToAdd) {
+    public boolean addOrUpdate(TeamPlayer teamPlayerToAdd) {
         teamPlayerRepository.save(teamPlayerToAdd);
         return true;
     }

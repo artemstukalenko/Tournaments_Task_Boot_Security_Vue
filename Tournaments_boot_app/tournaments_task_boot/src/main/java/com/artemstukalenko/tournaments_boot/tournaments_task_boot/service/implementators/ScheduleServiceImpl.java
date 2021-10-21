@@ -42,4 +42,5 @@ public class ScheduleServiceImpl implements ScheduleService {
         scheduleRepository.deleteById(scheduleId);
         return true;
     }
+
 }

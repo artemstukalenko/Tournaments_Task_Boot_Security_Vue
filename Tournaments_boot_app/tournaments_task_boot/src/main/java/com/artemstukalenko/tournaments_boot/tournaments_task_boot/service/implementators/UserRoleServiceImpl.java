@@ -36,7 +36,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    public boolean addOrUpdateRole(UserRole roleToAdd) {
+    public boolean addOrUpdate(UserRole roleToAdd) {
         userRoleRepository.save(roleToAdd);
         return true;
     }

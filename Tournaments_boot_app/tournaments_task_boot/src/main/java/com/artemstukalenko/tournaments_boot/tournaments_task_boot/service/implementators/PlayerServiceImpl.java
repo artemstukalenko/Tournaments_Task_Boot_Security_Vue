@@ -36,7 +36,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public boolean addOrUpdatePlayer(Player playerToAdd) {
+    public boolean addOrUpdate(Player playerToAdd) {
         playerRepository.save(playerToAdd);
         return true;
     }

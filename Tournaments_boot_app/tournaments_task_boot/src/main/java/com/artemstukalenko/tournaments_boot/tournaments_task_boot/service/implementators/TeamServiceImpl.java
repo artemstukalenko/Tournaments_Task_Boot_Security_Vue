@@ -40,7 +40,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public boolean addOrUpdateTeam(Team teamToAdd) {
+    public boolean addOrUpdate(Team teamToAdd) {
         teamRepository.save(teamToAdd);
 
         Schedule scheduleLinkedToThisTeam = scheduleRepository.findScheduleByTeamId(teamToAdd.getTeamId());

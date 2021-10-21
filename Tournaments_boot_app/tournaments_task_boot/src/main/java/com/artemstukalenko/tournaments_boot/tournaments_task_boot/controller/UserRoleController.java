@@ -34,7 +34,7 @@ public class UserRoleController {
     @PostMapping("/commitRole")
     public String commitRole(UserRole userRole) {
 
-        userRoleService.addOrUpdateRole(userRole);
+        userRoleService.addOrUpdate(userRole);
 
         return "forward:/roles/";
     }

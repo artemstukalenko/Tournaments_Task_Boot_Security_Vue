@@ -10,7 +10,7 @@ public interface UserRoleService {
 
     UserRole findRoleById(int roleId);
 
-    boolean addOrUpdateRole(UserRole roleToAdd);
+    boolean addOrUpdate(UserRole roleToAdd);
 
     boolean deleteRoleById(int roleId);
 }

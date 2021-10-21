@@ -47,7 +47,7 @@ public class TeamPlayersController {
         teamPlayer.setTeam(teamService.findTeamById(teamPlayer.getTeam().getTeamId()));
         teamPlayer.setPlayer(playerService.findPlayerById(teamPlayer.getPlayer().getId()));
 
-        teamPlayerService.addOrUpdateTeamPlayer(teamPlayer);
+        teamPlayerService.addOrUpdate(teamPlayer);
 
         return "forward:/teamplayers/";
     }
