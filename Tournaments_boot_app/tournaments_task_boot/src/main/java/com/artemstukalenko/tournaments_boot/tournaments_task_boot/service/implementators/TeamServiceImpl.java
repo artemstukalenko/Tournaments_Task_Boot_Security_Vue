@@ -3,6 +3,7 @@ package com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.imple
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.repositories.ScheduleRepository;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.repositories.TeamPlayerRepository;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.repositories.TeamRepository;
+import com.artemstukalenko.tournaments_boot.tournaments_task_boot.schedule.Schedule;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.TeamService;
 import entity.Team;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,14 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public boolean addOrUpdateTeam(Team teamToAdd) {
         teamRepository.save(teamToAdd);
+
+        Schedule scheduleLinkedToThisTeam = scheduleRepository.findScheduleByTeamId(teamToAdd.getTeamId());
+
+        if (scheduleLinkedToThisTeam != null) {
+            scheduleLinkedToThisTeam.setTeam(teamToAdd);
+            scheduleRepository.save(scheduleLinkedToThisTeam);
+        }
+
         return true;
     }
 

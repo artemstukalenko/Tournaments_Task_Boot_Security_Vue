@@ -2,6 +2,7 @@ package com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.imple
 
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.repositories.ScheduleRepository;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.repositories.TournamentRepository;
+import com.artemstukalenko.tournaments_boot.tournaments_task_boot.schedule.Schedule;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.TournamentService;
 import entity.Tournament;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,14 @@ public class TournamentServiceImpl implements TournamentService {
     @Override
     public boolean addOrUpdateTournament(Tournament tournamentToAdd) {
         tournamentRepository.save(tournamentToAdd);
+
+        Schedule scheduleLinkedToThisTournament = scheduleRepository.findScheduleByTournamentId(tournamentToAdd.getTournamentId());
+
+        if (scheduleLinkedToThisTournament != null) {
+            scheduleLinkedToThisTournament.setTournament(tournamentToAdd);
+            scheduleRepository.save(scheduleLinkedToThisTournament);
+        }
+
         return true;
     }
 
