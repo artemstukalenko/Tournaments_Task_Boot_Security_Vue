@@ -5,6 +5,7 @@ import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.Schedu
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.TeamService;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.TournamentService;
 
+import com.artemstukalenko.tournaments_boot.tournaments_task_boot.util.ScheduleIdGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +27,6 @@ public class ScheduleController {
 
     @RequestMapping("/")
     public String getAllSchedules(Model model) {
-
         model.addAttribute("allSchedules", scheduleService.getAllSchedules());
 
         return "schedules-page.html";
@@ -35,7 +35,9 @@ public class ScheduleController {
     @RequestMapping("/addSchedule")
     public String getAddScheduleForm(Model model) {
 
-        model.addAttribute("schedule", new Schedule());
+        Schedule scheduleToFill = new Schedule();
+
+        model.addAttribute("schedule", scheduleToFill);
         model.addAttribute("allTeams", teamService.getAllTeams());
         model.addAttribute("allTournaments", tournamentService.getAllTournaments());
 
@@ -48,13 +50,20 @@ public class ScheduleController {
         schedule.setTournament(tournamentService.findTournamentById(schedule.getTournament().getTournamentId()));
         schedule.setTeam(teamService.findTeamById(schedule.getTeam().getTeamId()));
 
+        System.out.println("SCHEDULE TO BE COMMITTED     " + schedule);
+
+        if (schedule.getScheduleId().isEmpty()) {
+            System.out.println("SCHEDULE ID IS ZERO      ");
+            schedule.setScheduleId(ScheduleIdGenerator.generateId(schedule));
+        }
+
         scheduleService.addOrUpdateSchedule(schedule);
 
         return "forward:/schedules/";
     }
 
     @RequestMapping("/deleteSchedule/{id}")
-    public String deleteSchedule(@PathVariable("id") int idToDelete) {
+    public String deleteSchedule(@PathVariable("id") String idToDelete) {
 
         scheduleService.deleteScheduleById(idToDelete);
 
@@ -62,9 +71,9 @@ public class ScheduleController {
     }
 
     @RequestMapping("/updateSchedule/{id}")
-    public String getFormToUpdateSchedule(@PathVariable("id") int idToUpdate,
+    public String getFormToUpdateSchedule(@PathVariable("id") String idToUpdate,
                                           Model model) {
-
+        System.out.println("SCHEDULE TO BE UPDATED:      " + scheduleService.findScheduleById(idToUpdate));
         model.addAttribute("schedule", scheduleService.findScheduleById(idToUpdate));
         model.addAttribute("allTeams", teamService.getAllTeams());
         model.addAttribute("allTournaments", tournamentService.getAllTournaments());

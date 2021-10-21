@@ -10,10 +10,10 @@ public interface ScheduleService {
 
     List<Schedule> getAllSchedules();
 
-    Schedule findScheduleById(int scheduleId);
+    Schedule findScheduleById(String scheduleId);
 
     boolean addOrUpdateSchedule(Schedule scheduleToAdd);
 
-    boolean deleteScheduleById(int scheduleId);
+    boolean deleteScheduleById(String scheduleId);
 
 }

@@ -4,17 +4,17 @@ import entity.AppEntity;
 import entity.Team;
 import entity.Tournament;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-@Entity
-@Document(collection = "schedules")
+@Document(collection = "schedule")
 public class Schedule extends AppEntity {
 
     @Id
-    @Column(name = "schedule_id")
-    private int scheduleId;
+    @Field("_id")
+    private String scheduleId;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tournament_id")
     private Tournament tournament;
@@ -23,12 +23,6 @@ public class Schedule extends AppEntity {
     private Team team;
 
     public Schedule(Tournament tournament, Team team) {
-        this.tournament = tournament;
-        this.team = team;
-    }
-
-    public Schedule(int scheduleId, Tournament tournament, Team team) {
-        this.scheduleId = scheduleId;
         this.tournament = tournament;
         this.team = team;
     }
@@ -44,11 +38,11 @@ public class Schedule extends AppEntity {
                 '}';
     }
 
-    public int getScheduleId() {
+    public String getScheduleId() {
         return scheduleId;
     }
 
-    public void setScheduleId(int scheduleId) {
+    public void setScheduleId(String scheduleId) {
         this.scheduleId = scheduleId;
     }
 
@@ -73,7 +67,7 @@ public class Schedule extends AppEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Schedule schedule = (Schedule) o;
-        return scheduleId == schedule.scheduleId && Objects.equals(tournament, schedule.tournament) && Objects.equals(team, schedule.team);
+        return Objects.equals(scheduleId, schedule.scheduleId) && Objects.equals(tournament, schedule.tournament) && Objects.equals(team, schedule.team);
     }
 
     @Override
