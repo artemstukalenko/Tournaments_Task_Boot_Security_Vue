@@ -108,7 +108,7 @@ public class User extends AppEntity {
     }
 
     public boolean isAdmin() {
-        return this.userRole.getRoleName().equalsIgnoreCase("admin") ? true : false;
+        return isAdmin;
     }
 
     public void setAdmin(boolean admin) {
