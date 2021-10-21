@@ -39,14 +39,6 @@ public class TournamentServiceImpl implements TournamentService {
     @Override
     public boolean addOrUpdate(Tournament tournamentToAdd) {
         tournamentRepository.save(tournamentToAdd);
-
-        Schedule scheduleLinkedToThisTournament = scheduleRepository.findScheduleByTournamentId(tournamentToAdd.getTournamentId());
-
-        if (scheduleLinkedToThisTournament != null) {
-            scheduleLinkedToThisTournament.setTournament(tournamentToAdd);
-            scheduleRepository.save(scheduleLinkedToThisTournament);
-        }
-
         return true;
     }
 

@@ -42,14 +42,6 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public boolean addOrUpdate(Team teamToAdd) {
         teamRepository.save(teamToAdd);
-
-        Schedule scheduleLinkedToThisTeam = scheduleRepository.findScheduleByTeamId(teamToAdd.getTeamId());
-
-        if (scheduleLinkedToThisTeam != null) {
-            scheduleLinkedToThisTeam.setTeam(teamToAdd);
-            scheduleRepository.save(scheduleLinkedToThisTeam);
-        }
-
         return true;
     }
 

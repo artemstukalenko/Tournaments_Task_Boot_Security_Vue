@@ -1,6 +1,5 @@
 package com.artemstukalenko.tournaments_boot.tournaments_task_boot.aspect;
 
-import com.artemstukalenko.tournaments_boot.tournaments_task_boot.repositories.ScheduleRepository;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.schedule.Schedule;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.ScheduleService;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.TeamService;
