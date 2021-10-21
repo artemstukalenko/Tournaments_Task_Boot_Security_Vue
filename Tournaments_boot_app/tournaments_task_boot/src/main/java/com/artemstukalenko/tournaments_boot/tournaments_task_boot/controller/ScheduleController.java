@@ -50,10 +50,7 @@ public class ScheduleController {
         schedule.setTournament(tournamentService.findTournamentById(schedule.getTournament().getTournamentId()));
         schedule.setTeam(teamService.findTeamById(schedule.getTeam().getTeamId()));
 
-        System.out.println("SCHEDULE TO BE COMMITTED     " + schedule);
-
         if (schedule.getScheduleId().isEmpty()) {
-            System.out.println("SCHEDULE ID IS ZERO      ");
             schedule.setScheduleId(ScheduleIdGenerator.generateId(schedule));
         }
 
@@ -73,7 +70,7 @@ public class ScheduleController {
     @RequestMapping("/updateSchedule/{id}")
     public String getFormToUpdateSchedule(@PathVariable("id") String idToUpdate,
                                           Model model) {
-        System.out.println("SCHEDULE TO BE UPDATED:      " + scheduleService.findScheduleById(idToUpdate));
+
         model.addAttribute("schedule", scheduleService.findScheduleById(idToUpdate));
         model.addAttribute("allTeams", teamService.getAllTeams());
         model.addAttribute("allTournaments", tournamentService.getAllTournaments());
