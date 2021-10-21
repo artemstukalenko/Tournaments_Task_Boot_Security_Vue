@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @SpringBootApplication
 @EntityScan("entity")
 @EnableJpaRepositories
-@EnableMongoRepositories
+@EnableMongoRepositories(basePackages = "com.artemstukalenko.tournaments_boot.tournaments_task_boot.repositories")
 public class TournamentsTaskBootApplication {
 
 	public static void main(String[] args) {

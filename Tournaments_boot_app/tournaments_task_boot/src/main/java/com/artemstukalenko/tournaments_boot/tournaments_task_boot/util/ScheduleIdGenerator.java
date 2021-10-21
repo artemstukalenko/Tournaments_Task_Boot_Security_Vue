@@ -7,7 +7,7 @@ import java.util.Random;
 public class ScheduleIdGenerator {
 
     public static String generateId(Schedule schedule) {
-        return String.valueOf ((new Random().nextInt() + 1) * schedule.getTeam().getTeamId()
+        return String.valueOf (Math.abs(new Random().nextInt() + 1) * schedule.getTeam().getTeamId()
                 * schedule.getTournament().getTournamentId());
     }
 

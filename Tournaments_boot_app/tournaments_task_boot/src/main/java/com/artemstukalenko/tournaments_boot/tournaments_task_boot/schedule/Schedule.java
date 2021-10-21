@@ -12,8 +12,9 @@ import java.util.Objects;
 @Document(collection = "schedule")
 public class Schedule extends AppEntity {
 
-    @Id
+    @javax.persistence.Id
     @Field("_id")
+    @org.springframework.data.annotation.Id
     private String scheduleId;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "tournament_id")

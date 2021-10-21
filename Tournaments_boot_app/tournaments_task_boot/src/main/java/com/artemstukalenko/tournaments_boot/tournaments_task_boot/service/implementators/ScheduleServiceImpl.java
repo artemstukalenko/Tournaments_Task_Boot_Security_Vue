@@ -33,15 +33,12 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public boolean addOrUpdateSchedule(Schedule scheduleToAdd) {
-        System.out.println("THIS SCHEDULE EXISTS:          " + scheduleRepository.equals(scheduleToAdd));
         scheduleRepository.save(scheduleToAdd);
         return true;
     }
 
     @Override
     public boolean deleteScheduleById(String scheduleId) {
-        System.out.println("ID      " + scheduleId);
-        System.out.println("SCHEDULE WITH THIS ID     " + findScheduleById(scheduleId));
         scheduleRepository.deleteById(scheduleId);
         return true;
     }

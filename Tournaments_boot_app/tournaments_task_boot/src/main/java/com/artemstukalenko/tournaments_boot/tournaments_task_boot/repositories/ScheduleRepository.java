@@ -13,10 +13,10 @@ import org.springframework.stereotype.Repository;
 public interface ScheduleRepository extends MongoRepository<Schedule, String> {
 
     @Modifying
-    @Query(value = "{'team_Id' : #{idToDelete}}", delete = true)
-    void deleteScheduleByTeamId(@Param("idToDelete") Integer teamId);
+    @Query(value = "{'team_Id' : ?0}", delete = true)
+    void deleteScheduleByTeamId(Integer teamId);
 
     @Modifying
-    @Query(value = "{'tournament_id' : #{idToDelete}}", delete = true)
-    void deleteScheduleByTournamentId(@Param("idToDelete") Integer teamId);
+    @Query(value = "{'tournament_id' : ?0}", delete = true)
+    void deleteScheduleByTournamentId(Integer teamId);
 }
