@@ -23,4 +23,8 @@ public interface TeamPlayerRepository extends JpaRepository<TeamPlayer, Integer>
     @Modifying
     @Query(value = "delete from team_players where player_id in (:playerIds)", nativeQuery = true)
     void deleteAllByPlayerId(@Param("playerIds") List<Integer> playerIds);
+
+    @Modifying
+    @Query(value = "delete from team_players where team_id in (:teamIds)", nativeQuery = true)
+    void deleteAllByTeamId(@Param("teamIds") List<Integer> teamIds);
 }

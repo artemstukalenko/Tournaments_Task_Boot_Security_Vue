@@ -56,9 +56,9 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public boolean deleteTeamByUserId(int userId) {
 
-        for(Team team : teamRepository.findTeamsByUserId(userId)) {
-            deleteTeamById(team.getTeamId());
-        }
+        List<Integer> teamsWithThisUserId = teamRepository.findTeamIdsByUserId(userId);
+        teamPlayerRepository.deleteAllByTeamId(teamsWithThisUserId);
+        teamRepository.deleteAllById(teamsWithThisUserId);
 
         return true;
     }
