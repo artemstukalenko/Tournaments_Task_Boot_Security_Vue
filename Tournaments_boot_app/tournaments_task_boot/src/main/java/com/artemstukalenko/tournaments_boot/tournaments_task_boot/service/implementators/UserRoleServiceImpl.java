@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -54,4 +55,13 @@ public class UserRoleServiceImpl implements UserRoleService {
         return true;
     }
 
+    @Override
+    public String[] getAllRoleNames() {
+        List<String> roleNames = userRoleRepository.findAll()
+                .stream()
+                .map(role -> role.getRoleName())
+                .collect(Collectors.toList());
+
+        return roleNames.toArray(new String[roleNames.size()]);
+    }
 }

@@ -13,4 +13,6 @@ public interface UserRoleService {
     boolean addOrUpdate(UserRole roleToAdd);
 
     boolean deleteRoleById(int roleId);
+
+    String[] getAllRoleNames();
 }
