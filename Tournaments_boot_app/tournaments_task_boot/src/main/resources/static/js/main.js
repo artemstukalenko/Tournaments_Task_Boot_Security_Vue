@@ -1,10 +1,12 @@
-Vue.component('hello-message', {
+Vue.component('message', {
     template: '<li>This is hello message!</li>'
 })
 
-new Vue({
-    el: "#app",
-    data: {
-        message: "HELLO FROM VUE!!!"
-    }
-});
+window.onload = function () {
+    var main = new Vue({
+        el: '#app',
+        data: {
+            message: 'THIS IS FROM JS!!!'
+        }
+    });
+}
