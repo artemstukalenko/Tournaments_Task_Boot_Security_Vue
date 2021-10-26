@@ -49,11 +49,12 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
-    public boolean deletePlayerByUserId(int userId) {
+    public boolean deletePlayersByUserId(int userId) {
 
-        for (Player player : playerRepository.findPlayersByUserId(userId)) {
-            deletePlayerById(player.getId());
-        }
+        List<Integer> playersWithThisUserId = playerRepository
+                .findPlayersIdsByUserId(userId);
+        teamPlayerRepository.deleteAllByPlayerId(playersWithThisUserId);
+        playerRepository.deleteAllById(playersWithThisUserId);
 
         return true;
     }

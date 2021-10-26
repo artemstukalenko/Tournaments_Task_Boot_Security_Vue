@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteUserById(int userId) {
         teamService.deleteTeamByUserId(userId);
-        playerService.deletePlayerByUserId(userId);
+        playerService.deletePlayersByUserId(userId);
         tournamentService.deleteTournamentByUserId(userId);
 
         userRepository.deleteById(userId);

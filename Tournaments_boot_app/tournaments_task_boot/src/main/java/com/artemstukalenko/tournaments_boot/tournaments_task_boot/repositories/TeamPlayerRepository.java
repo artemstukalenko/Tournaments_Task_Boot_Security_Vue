@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface TeamPlayerRepository extends JpaRepository<TeamPlayer, Integer> {
 
@@ -17,4 +19,8 @@ public interface TeamPlayerRepository extends JpaRepository<TeamPlayer, Integer>
     @Modifying
     @Query(value = "delete from team_players where player_id = :value", nativeQuery = true)
     void deleteTeamPlayerByPlayerId(@Param("value") Integer playerToDeleteId);
+
+    @Modifying
+    @Query(value = "delete from team_players where player_id in (:playerIds)", nativeQuery = true)
+    void deleteAllByPlayerId(@Param("playerIds") List<Integer> playerIds);
 }

@@ -14,5 +14,5 @@ public interface PlayerService {
 
     boolean deletePlayerById(int playerToDeleteId);
 
-    boolean deletePlayerByUserId(int userId);
+    boolean deletePlayersByUserId(int userId);
 }
