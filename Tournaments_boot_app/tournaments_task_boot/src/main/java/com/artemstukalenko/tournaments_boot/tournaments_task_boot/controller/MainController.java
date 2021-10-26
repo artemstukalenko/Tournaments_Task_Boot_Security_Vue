@@ -10,7 +10,7 @@ public class MainController {
     @RequestMapping("/")
     public String getHomepage(Model model) {
 
-        return "homepage-with-bootstrap.html";
+        return "index.html";
 
     }
 
