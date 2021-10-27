@@ -9,11 +9,12 @@ import com.artemstukalenko.tournaments_boot.tournaments_task_boot.util.ScheduleI
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/schedules")
+import java.util.List;
+
+@RestController
+@RequestMapping("/api")
 public class ScheduleController {
 
     @Autowired
@@ -25,27 +26,27 @@ public class ScheduleController {
     @Autowired
     private TournamentService tournamentService;
 
-    @RequestMapping("/")
-    public String getAllSchedules(Model model) {
-        model.addAttribute("allSchedules", scheduleService.getAllSchedules());
+    @GetMapping("/schedules")
+    public List<Schedule> getAllSchedules(Model model) {
+//        model.addAttribute("allSchedules", scheduleService.getAllSchedules());
 
-        return "schedules-page.html";
+        return scheduleService.getAllSchedules();
     }
 
-    @RequestMapping("/addSchedule")
-    public String getAddScheduleForm(Model model) {
+//    @RequestMapping("/addSchedule")
+//    public String getAddScheduleForm(Model model) {
+//
+//        Schedule scheduleToFill = new Schedule();
+//
+//        model.addAttribute("schedule", scheduleToFill);
+//        model.addAttribute("allTeams", teamService.getAllTeams());
+//        model.addAttribute("allTournaments", tournamentService.getAllTournaments());
+//
+//        return "schedule-form.html";
+//    }
 
-        Schedule scheduleToFill = new Schedule();
-
-        model.addAttribute("schedule", scheduleToFill);
-        model.addAttribute("allTeams", teamService.getAllTeams());
-        model.addAttribute("allTournaments", tournamentService.getAllTournaments());
-
-        return "schedule-form.html";
-    }
-
-    @RequestMapping("/commitSchedule")
-    public String commitSchedule(Schedule schedule) {
+    @PostMapping("/schedules")
+    public Schedule commitSchedule(@RequestBody Schedule schedule) {
 
         schedule.setTournament(tournamentService.findTournamentById(schedule.getTournament().getTournamentId()));
         schedule.setTeam(teamService.findTeamById(schedule.getTeam().getTeamId()));
@@ -56,26 +57,24 @@ public class ScheduleController {
 
         scheduleService.addOrUpdateSchedule(schedule);
 
-        return "forward:/schedules/";
+        return schedule;
     }
 
-    @RequestMapping("/deleteSchedule/{id}")
-    public String deleteSchedule(@PathVariable("id") String idToDelete) {
+    @DeleteMapping("/schedules/{id}")
+    public boolean deleteSchedule(@PathVariable("id") String idToDelete) {
 
-        scheduleService.deleteScheduleById(idToDelete);
-
-        return "forward:/schedules/";
+        return scheduleService.deleteScheduleById(idToDelete);
     }
 
-    @RequestMapping("/updateSchedule/{id}")
-    public String getFormToUpdateSchedule(@PathVariable("id") String idToUpdate,
-                                          Model model) {
-
-        model.addAttribute("schedule", scheduleService.findScheduleById(idToUpdate));
-        model.addAttribute("allTeams", teamService.getAllTeams());
-        model.addAttribute("allTournaments", tournamentService.getAllTournaments());
-
-        return "schedule-form.html";
-    }
+//    @RequestMapping("/updateSchedule/{id}")
+//    public String getFormToUpdateSchedule(@PathVariable("id") String idToUpdate,
+//                                          Model model) {
+//
+//        model.addAttribute("schedule", scheduleService.findScheduleById(idToUpdate));
+//        model.addAttribute("allTeams", teamService.getAllTeams());
+//        model.addAttribute("allTournaments", tournamentService.getAllTournaments());
+//
+//        return "schedule-form.html";
+//    }
 
 }

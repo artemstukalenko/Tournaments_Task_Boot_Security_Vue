@@ -5,57 +5,54 @@ import entity.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/roles")
+import java.util.List;
+
+@RestController
+@RequestMapping("/api")
 public class UserRoleController {
 
     @Autowired
     private UserRoleService userRoleService;
 
-    @RequestMapping("/")
-    public String showRoles(Model model) {
-        model.addAttribute("allRoles", userRoleService.getAllUserRoles());
+    @GetMapping("/roles")
+    public List<UserRole> showRoles(Model model) {
+//        model.addAttribute("allRoles", userRoleService.getAllUserRoles());
 
-        return "roles-page.html";
+        return userRoleService.getAllUserRoles();
     }
 
-    @RequestMapping("/addRole")
-    public String getAddRoleForm(Model model) {
+//    @RequestMapping("/addRole")
+//    public String getAddRoleForm(Model model) {
+//
+//        model.addAttribute("userRole", new UserRole());
+//
+//        return "add-new-role-form.html";
+//    }
 
-        model.addAttribute("userRole", new UserRole());
-
-        return "add-new-role-form.html";
-    }
-
-    @PostMapping("/commitRole")
-    public String commitRole(UserRole userRole) {
+    @PostMapping("/roles")
+    public UserRole commitRole(@RequestBody UserRole userRole) {
 
         userRoleService.addOrUpdate(userRole);
 
-        return "forward:/roles/";
+        return userRole;
     }
 
-    @RequestMapping("/deleteRole/{id}")
-    public String deleteRole(@PathVariable("id") int idToDelete) {
+    @DeleteMapping("/roles/{id}")
+    public boolean deleteRole(@PathVariable("id") int idToDelete) {
 
-        userRoleService.deleteRoleById(idToDelete);
-
-        return "forward:/roles/";
+        return userRoleService.deleteRoleById(idToDelete);
     }
 
-    @RequestMapping("/updateRole/{id}")
-    public String getUpdateRoleForm(@PathVariable("id") int idToUpdate, Model model) {
-
-        UserRole roleToUpdate = userRoleService.findRoleById(idToUpdate);
-
-        model.addAttribute("userRole", roleToUpdate);
-//        System.out.println("ROLE:      " + model.getAttribute("userRole"));
-
-        return "add-new-role-form.html";
-    }
+//    @RequestMapping("/updateRole/{id}")
+//    public String getUpdateRoleForm(@PathVariable("id") int idToUpdate, Model model) {
+//
+//        UserRole roleToUpdate = userRoleService.findRoleById(idToUpdate);
+//
+//        model.addAttribute("userRole", roleToUpdate);
+//
+//        return "add-new-role-form.html";
+//    }
 
 }

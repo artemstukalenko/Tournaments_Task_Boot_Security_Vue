@@ -7,11 +7,12 @@ import entity.TeamPlayer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/teamplayers")
+import java.util.List;
+
+@RestController
+@RequestMapping("/api")
 public class TeamPlayersController {
 
     @Autowired
@@ -23,51 +24,49 @@ public class TeamPlayersController {
     @Autowired
     private PlayerService playerService;
 
-    @RequestMapping("/")
-    public String getAllTeamplayers(Model model) {
+    @GetMapping("/teamplayers")
+    public List<TeamPlayer> getAllTeamplayers(Model model) {
 
-        model.addAttribute("allTeamplayers", teamPlayerService.getAllTeamPlayers());
+//        model.addAttribute("allTeamplayers", teamPlayerService.getAllTeamPlayers());
 
-        return "teamplayers-page.html";
+        return teamPlayerService.getAllTeamPlayers();
     }
 
-    @RequestMapping("/addTeamPlayer")
-    public String addTeamPlayerForm(Model model) {
+//    @PostMapping("/teamplayers")
+//    public String addTeamPlayerForm(Model model) {
+//
+//        model.addAttribute("teamPlayer", new TeamPlayer());
+//        model.addAttribute("allTeams", teamService.getAllTeams());
+//        model.addAttribute("allPlayers", playerService.getAllPlayers());
+//
+//        return "teamplayer-form.html";
+//    }
 
-        model.addAttribute("teamPlayer", new TeamPlayer());
-        model.addAttribute("allTeams", teamService.getAllTeams());
-        model.addAttribute("allPlayers", playerService.getAllPlayers());
-
-        return "teamplayer-form.html";
-    }
-
-    @RequestMapping("/commitTeamPlayer")
-    public String commitTeamPlayer(TeamPlayer teamPlayer) {
+    @PostMapping("/teamplayers")
+    public TeamPlayer commitTeamPlayer(@RequestBody TeamPlayer teamPlayer) {
 
         teamPlayer.setTeam(teamService.findTeamById(teamPlayer.getTeam().getTeamId()));
         teamPlayer.setPlayer(playerService.findPlayerById(teamPlayer.getPlayer().getId()));
 
         teamPlayerService.addOrUpdate(teamPlayer);
 
-        return "forward:/teamplayers/";
+        return teamPlayer;
     }
 
-    @RequestMapping("/deleteTeamPlayer/{id}")
-    public String deleteTeamPlayer(@PathVariable("id") int idToDelete) {
+    @DeleteMapping("/teamplayers/{id}")
+    public boolean deleteTeamPlayer(@PathVariable("id") int idToDelete) {
 
-        teamPlayerService.deleteTeamPlayerById(idToDelete);
-
-        return "forward:/teamplayers/";
+        return teamPlayerService.deleteTeamPlayerById(idToDelete);
     }
 
-    @RequestMapping("/updateTeamPlayer/{id}")
-    public String getFormToUpdateTeamPlayer(@PathVariable("id") int idToUpdate,
-                                            Model model) {
-
-        model.addAttribute("teamPlayer", teamPlayerService.findTeamPlayerById(idToUpdate));
-        model.addAttribute("allTeams", teamService.getAllTeams());
-        model.addAttribute("allPlayers", playerService.getAllPlayers());
-
-        return "teamplayer-form.html";
-    }
+//    @RequestMapping("/updateTeamPlayer/{id}")
+//    public String getFormToUpdateTeamPlayer(@PathVariable("id") int idToUpdate,
+//                                            Model model) {
+//
+//        model.addAttribute("teamPlayer", teamPlayerService.findTeamPlayerById(idToUpdate));
+//        model.addAttribute("allTeams", teamService.getAllTeams());
+//        model.addAttribute("allPlayers", playerService.getAllPlayers());
+//
+//        return "teamplayer-form.html";
+//    }
 }

@@ -6,14 +6,13 @@ import entity.Tournament;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
-@Controller
-@RequestMapping("/tournaments")
+@RestController
+@RequestMapping("/api")
 public class TournamentController {
 
     @Autowired
@@ -22,25 +21,25 @@ public class TournamentController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
-    public String getAllTournaments(Model model) {
+    @GetMapping("/tournaments")
+    public List<Tournament> getAllTournaments(Model model) {
 
-        model.addAttribute("allTournaments", tournamentService.getAllTournaments());
+//        model.addAttribute("allTournaments", tournamentService.getAllTournaments());
 
-        return "tournaments-page.html";
+        return tournamentService.getAllTournaments();
     }
 
-    @RequestMapping("/addTournament")
-    public String getAddTournamentForm(Model model) {
+//    @RequestMapping("/addTournament")
+//    public String getAddTournamentForm(Model model) {
+//
+//        model.addAttribute("tournament", new Tournament());
+//        model.addAttribute("allUsers", userService.getAllUsers());
+//
+//        return "tournament-form.html";
+//    }
 
-        model.addAttribute("tournament", new Tournament());
-        model.addAttribute("allUsers", userService.getAllUsers());
-
-        return "tournament-form.html";
-    }
-
-    @RequestMapping("/commitTournament")
-    public String commitTournament(Tournament tournament,
+    @PostMapping("/tournaments")
+    public Tournament commitTournament(@RequestBody Tournament tournament,
                                    @RequestParam("start_date") String startDateString,
                                    @RequestParam("end_date") String endDateString) {
 
@@ -51,25 +50,23 @@ public class TournamentController {
 
         tournamentService.addOrUpdate(tournament);
 
-        return "forward:/tournaments/";
+        return tournament;
     }
 
-    @RequestMapping("/deleteTournament/{id}")
-    public String deleteTournament(@PathVariable("id") int idToDelete) {
+    @DeleteMapping("/tournaments/{id}")
+    public boolean deleteTournament(@PathVariable("id") int idToDelete) {
 
-        tournamentService.deleteTournamentById(idToDelete);
-
-        return "forward:/tournaments/";
+        return tournamentService.deleteTournamentById(idToDelete);
     }
 
-    @RequestMapping("/updateTournament/{id}")
-    public String getFormToUpdateTournament(@PathVariable("id") int idToUpdate,
-                                            Model model) {
-
-        model.addAttribute("tournament", tournamentService.findTournamentById(idToUpdate));
-        model.addAttribute("allUsers", userService.getAllUsers());
-
-        return "tournament-form.html";
-    }
+//    @RequestMapping("/updateTournament/{id}")
+//    public String getFormToUpdateTournament(@PathVariable("id") int idToUpdate,
+//                                            Model model) {
+//
+//        model.addAttribute("tournament", tournamentService.findTournamentById(idToUpdate));
+//        model.addAttribute("allUsers", userService.getAllUsers());
+//
+//        return "tournament-form.html";
+//    }
 
 }

@@ -4,13 +4,13 @@ import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.Player
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.UserService;
 import entity.Player;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/players")
+import java.util.List;
+
+@RestController
+@RequestMapping("/api")
 public class PlayerController {
 
     @Autowired
@@ -19,48 +19,46 @@ public class PlayerController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
-    public String getAllPlayers(Model model) {
+    @GetMapping("/players")
+    public List<Player> getAllPlayers(Model model) {
 
-        model.addAttribute("allPlayers", playerService.getAllPlayers());
+//        model.addAttribute("allPlayers", playerService.getAllPlayers());
 
-        return "players-page.html";
+        return playerService.getAllPlayers();
     }
 
-    @RequestMapping("/addPlayer")
-    public String getAddPlayerForm(Model model) {
+//    @PostMapping("/players")
+//    public String getAddPlayerForm(Model model) {
+//
+//        model.addAttribute("player", new Player());
+//        model.addAttribute("allUsers", userService.getAllUsers());
+//
+//        return "player-form.html";
+//    }
 
-        model.addAttribute("player", new Player());
-        model.addAttribute("allUsers", userService.getAllUsers());
-
-        return "player-form.html";
-    }
-
-    @RequestMapping("/commitPlayer")
-    public String commitPlayer(Player player) {
+    @PostMapping("/players")
+    public Player commitPlayer(@RequestBody Player player) {
 
         player.setUser(userService.findUserById(player.getUser().getUserId()));
 
         playerService.addOrUpdate(player);
 
-        return "forward:/players/";
+        return player;
     }
 
-    @RequestMapping("/deletePlayer/{id}")
-    public String deletePlayer(@PathVariable("id") int idToDelete) {
+    @DeleteMapping("/players/{id}")
+    public boolean deletePlayer(@PathVariable("id") int idToDelete) {
 
-        playerService.deletePlayerById(idToDelete);
-
-        return "forward:/players/";
+        return playerService.deletePlayerById(idToDelete);
     }
 
-    @RequestMapping("/updatePlayer/{id}")
-    public String getFormToUpdatePlayer(@PathVariable("id") int idToUpdate,
-                                        Model model) {
-
-        model.addAttribute("player", playerService.findPlayerById(idToUpdate));
-        model.addAttribute("allUsers", userService.getAllUsers());
-
-        return "player-form.html";
-    }
+//    @RequestMapping("/updatePlayer/{id}")
+//    public String getFormToUpdatePlayer(@PathVariable("id") int idToUpdate,
+//                                        Model model) {
+//
+//        model.addAttribute("player", playerService.findPlayerById(idToUpdate));
+//        model.addAttribute("allUsers", userService.getAllUsers());
+//
+//        return "player-form.html";
+//    }
 }

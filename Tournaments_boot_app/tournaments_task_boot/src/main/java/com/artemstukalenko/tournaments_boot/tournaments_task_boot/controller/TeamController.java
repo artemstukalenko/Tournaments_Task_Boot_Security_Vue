@@ -6,11 +6,12 @@ import entity.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/teams")
+import java.util.List;
+
+@RestController
+@RequestMapping("/api")
 public class TeamController {
 
     @Autowired
@@ -19,46 +20,44 @@ public class TeamController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
-    public String getAllTeams(Model model) {
+    @GetMapping("/teams")
+    public List<Team> getAllTeams(Model model) {
 
-        model.addAttribute("allTeams", teamService.getAllTeams());
+//        model.addAttribute("allTeams", teamService.getAllTeams());
 
-        return "teams-page.html";
+        return teamService.getAllTeams();
     }
 
-    @RequestMapping("/addTeam")
-    public String getAddTeamForm(Model model) {
+//    @RequestMapping("/addTeam")
+//    public String getAddTeamForm(Model model) {
+//
+//        model.addAttribute("team", new Team());
+//        model.addAttribute("allUsers", userService.getAllUsers());
+//
+//        return "team-form.html";
+//    }
 
-        model.addAttribute("team", new Team());
-        model.addAttribute("allUsers", userService.getAllUsers());
-
-        return "team-form.html";
-    }
-
-    @RequestMapping("/commitTeam")
-    public String commitTeam(Team team) {
+    @PostMapping("/teams")
+    public Team commitTeam(@RequestBody Team team) {
 
         teamService.addOrUpdate(team);
 
-        return "forward:/teams/";
+        return team;
     }
 
-    @RequestMapping("/deleteTeam/{id}")
-    public String deleteTeam(@PathVariable("id") int idToDelete) {
+    @DeleteMapping("/teams/{id}")
+    public boolean deleteTeam(@PathVariable("id") int idToDelete) {
 
-        teamService.deleteTeamById(idToDelete);
-
-        return "forward:/teams/";
+        return teamService.deleteTeamById(idToDelete);
     }
 
-    @RequestMapping("/updateTeam/{id}")
-    public String getFormToUpdateTeam(@PathVariable("id") int idToUpdate,
-                                      Model model) {
-
-        model.addAttribute("team", teamService.findTeamById(idToUpdate));
-        model.addAttribute("allUsers", userService.getAllUsers());
-
-        return "team-form.html";
-    }
+//    @RequestMapping("/updateTeam/{id}")
+//    public String getFormToUpdateTeam(@PathVariable("id") int idToUpdate,
+//                                      Model model) {
+//
+//        model.addAttribute("team", teamService.findTeamById(idToUpdate));
+//        model.addAttribute("allUsers", userService.getAllUsers());
+//
+//        return "team-form.html";
+//    }
 }

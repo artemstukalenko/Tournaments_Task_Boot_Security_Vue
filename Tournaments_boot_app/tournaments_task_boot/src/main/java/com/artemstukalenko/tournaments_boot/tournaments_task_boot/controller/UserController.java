@@ -6,11 +6,12 @@ import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/users")
+import java.util.List;
+
+@RestController
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired
@@ -19,47 +20,45 @@ public class UserController {
     @Autowired
     private UserRoleService userRoleService;
 
-    @RequestMapping("/")
-    public String getAllUsers(Model model) {
+    @GetMapping("/users")
+    public List<User> getAllUsers(Model model) {
 
-        model.addAttribute("allUsers", userService.getAllUsers());
+//        model.addAttribute("allUsers", userService.getAllUsers());
 
-        return "users-page.html";
+        return userService.getAllUsers();
     }
 
-    @RequestMapping("/addUser")
-    public String getAddUserForm(Model model) {
+//    @RequestMapping("/addUser")
+//    public String getAddUserForm(Model model) {
+//
+//        model.addAttribute("user", new User());
+//        model.addAttribute("availableRoles", userRoleService.getAllUserRoles());
+//
+//        return "user-form.html";
+//    }
 
-        model.addAttribute("user", new User());
-        model.addAttribute("availableRoles", userRoleService.getAllUserRoles());
-
-        return "user-form.html";
-    }
-
-    @RequestMapping("/commitUser")
-    public String commitUser(User user) {
+    @PostMapping("/users")
+    public User commitUser(@RequestBody User user) {
 
         user.setUserRole(userRoleService.findRoleById(user.getUserRole().getRoleId()));
 
         userService.addOrUpdate(user);
 
-        return "forward:/users/";
+        return user;
     }
 
-    @RequestMapping("/deleteUser/{id}")
-    public String deleteUser(@PathVariable("id") int idToDelete) {
+    @DeleteMapping("/users/{id}")
+    public boolean deleteUser(@PathVariable("id") int idToDelete) {
 
-        userService.deleteUserById(idToDelete);
-
-        return "forward:/users/";
+        return userService.deleteUserById(idToDelete);
     }
 
-    @RequestMapping("/updateUser/{id}")
-    public String getFormToUpdateUser(@PathVariable("id") int idToUpdate, Model model) {
-
-        model.addAttribute("user", userService.findUserById(idToUpdate));
-        model.addAttribute("availableRoles", userRoleService.getAllUserRoles());
-
-        return "user-form.html";
-    }
+//    @RequestMapping("/updateUser/{id}")
+//    public String getFormToUpdateUser(@PathVariable("id") int idToUpdate, Model model) {
+//
+//        model.addAttribute("user", userService.findUserById(idToUpdate));
+//        model.addAttribute("availableRoles", userRoleService.getAllUserRoles());
+//
+//        return "user-form.html";
+//    }
 }

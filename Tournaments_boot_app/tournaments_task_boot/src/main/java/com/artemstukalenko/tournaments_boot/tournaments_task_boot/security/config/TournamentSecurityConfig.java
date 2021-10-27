@@ -35,11 +35,14 @@ public class TournamentSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+                .csrf().disable()
                 .authorizeRequests()
                 .anyRequest().hasAnyRole(roleService.getAllRoleNames())
                 .and().formLogin()
-                .successForwardUrl(SUCCESS_FORWARD_URL);
+//                .successForwardUrl(SUCCESS_FORWARD_URL)
+                .disable();
+//                .successForwardUrl(SUCCESS_FORWARD_URL);
 //                .and()
 //                .formLogin().loginPage(LOGIN_PAGE_URL).successForwardUrl(SUCCESS_FORWARD_URL)
 //                .loginProcessingUrl(LOGIN_PROCESSING_URL)
