@@ -4,6 +4,7 @@
         <RoleComponent
             v-for="role of rolesList"
             v-bind:role="role"
+            v-on:remove-role="removeRole"
         />
     </ul>
   </div>
@@ -22,6 +23,11 @@ export default {
   ],
   components: {
     RoleComponent
+  },
+  methods: {
+    removeRole(id) {
+      this.$emit('remove-role', id)
+    }
   }
 }
 

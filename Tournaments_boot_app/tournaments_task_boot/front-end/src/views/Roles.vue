@@ -7,6 +7,7 @@
 
     <RoleList
     v-bind:rolesList="roles"
+    @remove-role="removeRole"
     />
 
   </div>
@@ -25,6 +26,15 @@ export default {
   data() {
     return {
       roles: []
+    }
+  },
+  methods: {
+    removeRole(id) {
+      const requestOptions = {
+        method: 'DELETE'
+      };
+
+      fetch(('http://localhost:8080/api/roles/' + id), requestOptions)
     }
   },
   mounted() {
