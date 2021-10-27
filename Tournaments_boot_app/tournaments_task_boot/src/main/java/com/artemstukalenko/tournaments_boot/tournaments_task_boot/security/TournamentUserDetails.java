@@ -1,3 +1,4 @@
+/*
 package com.artemstukalenko.tournaments_boot.tournaments_task_boot.security;
 
 import entity.User;
@@ -53,3 +54,4 @@ public class TournamentUserDetails implements UserDetails {
         return true;
     }
 }
+*/
