@@ -5,6 +5,36 @@
 
     <router-link to="/">Homepage</router-link>
 
+    <RoleList
+    v-bind:rolesList="roles"
+    />
+
   </div>
 
 </template>
+
+<script>
+import RoleList from '@/components/role/RoleList'
+import RoleComponent from '@/components/role/RoleComponent'
+
+export default {
+
+  components: {
+    RoleList, RoleComponent
+  },
+  data() {
+    return {
+      roles: []
+    }
+  },
+  mounted() {
+    fetch('http://localhost:8080/api/roles')
+        .then(response => response.json())
+        .then(json => {
+          this.roles = json
+        })
+  }
+
+}
+
+</script>
