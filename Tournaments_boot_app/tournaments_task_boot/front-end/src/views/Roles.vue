@@ -35,7 +35,9 @@ export default {
       };
 
       fetch(('http://localhost:8080/api/roles/' + id), requestOptions)
-    }
+
+      this.roles = this.roles.filter(role => role.roleId !== id)
+    },
   },
   mounted() {
     fetch('http://localhost:8080/api/roles')
