@@ -29,7 +29,7 @@ public class ScheduleController {
     @GetMapping("/schedules")
     public List<Schedule> getAllSchedules(Model model) {
 //        model.addAttribute("allSchedules", scheduleService.getAllSchedules());
-
+        
         return scheduleService.getAllSchedules();
     }
 
@@ -51,7 +51,7 @@ public class ScheduleController {
         schedule.setTournament(tournamentService.findTournamentById(schedule.getTournament().getTournamentId()));
         schedule.setTeam(teamService.findTeamById(schedule.getTeam().getTeamId()));
 
-        if (schedule.getScheduleId().isEmpty()) {
+        if (schedule.getScheduleId() == null) {
             schedule.setScheduleId(ScheduleIdGenerator.generateId(schedule));
         }
 

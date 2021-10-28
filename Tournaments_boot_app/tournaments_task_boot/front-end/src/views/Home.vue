@@ -8,7 +8,8 @@
     <router-link to="/players">Work with players</router-link><hr/>
     <router-link to="/teams">Work with teams</router-link><hr/>
     <router-link to="/teamplayers">Work with teamplayers</router-link><hr/>
-    <router-link to="/tournaments">Work with tournaments</router-link>
+    <router-link to="/tournaments">Work with tournaments</router-link><hr/>
+    <router-link to="/schedules">Work with schedules</router-link>
 
   </div>
 

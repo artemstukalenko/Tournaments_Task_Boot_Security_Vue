@@ -7,6 +7,7 @@ import Players from "@/views/Players";
 import Teams from "@/views/Teams";
 import Teamplayers from "@/views/Teamplayers";
 import Tournaments from "@/views/Tournaments";
+import Schedules from "@/views/Schedules";
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/tournaments',
     name: 'Tournaments',
     component: Tournaments
+  },
+  {
+    path: '/schedules',
+    name: 'Schedules',
+    component: Schedules
   }
 ]
 
