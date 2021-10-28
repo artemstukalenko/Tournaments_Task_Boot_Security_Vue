@@ -3,13 +3,14 @@
     <h2>ROLES</h2>
     <hr/>
 
-    <router-link to="/">Homepage</router-link>
+    <a v-bind:href="/addRole/">Add new Role</a>
 
     <RoleList
     v-bind:rolesList="roles"
     @remove-role="removeRole"
     />
 
+<!--    <AddRoleForm/>-->
   </div>
 
 </template>
@@ -17,11 +18,12 @@
 <script>
 import RoleList from '@/components/role/RoleList'
 import RoleComponent from '@/components/role/RoleComponent'
+import AddRoleForm from "@/components/role/AddRoleForm";
 
 export default {
 
   components: {
-    RoleList, RoleComponent
+    RoleList, RoleComponent, AddRoleForm
   },
   data() {
     return {
