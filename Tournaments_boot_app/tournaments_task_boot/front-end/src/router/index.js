@@ -4,6 +4,7 @@ import Home from '@/views/Home'
 import Roles from '@/views/Roles'
 import Users from "@/views/Users";
 import Players from "@/views/Players";
+import Teams from "@/views/Teams";
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/players',
     name: 'Players',
     component: Players
+  },
+  {
+    path: '/teams',
+    name: 'Teams',
+    component: Teams
   }
 ]
 
