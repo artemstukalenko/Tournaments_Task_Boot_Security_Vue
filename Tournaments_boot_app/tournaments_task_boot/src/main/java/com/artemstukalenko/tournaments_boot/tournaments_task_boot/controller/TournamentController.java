@@ -39,12 +39,7 @@ public class TournamentController {
 //    }
 
     @PostMapping("/tournaments")
-    public Tournament commitTournament(@RequestBody Tournament tournament,
-                                   @RequestParam("start_date") String startDateString,
-                                   @RequestParam("end_date") String endDateString) {
-
-        tournament.setStartDate(LocalDate.parse(startDateString));
-        tournament.setEndDate(LocalDate.parse(endDateString));
+    public Tournament commitTournament(@RequestBody Tournament tournament) {
 
         tournament.setUser(userService.findUserById(tournament.getUser().getUserId()));
 
