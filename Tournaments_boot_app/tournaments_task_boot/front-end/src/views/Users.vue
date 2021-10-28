@@ -2,7 +2,9 @@
   <div>
     <h2>USERS</h2>
 
-    <AddUserForm/>
+    <AddUserForm
+    @add-user-to-page = "addUserToPage"
+    />
 
     <hr/>
 
@@ -40,6 +42,9 @@ export default {
 
       this.users = this.users.filter(user => user.userId !== id)
     },
+    addUserToPage(user) {
+      this.users.push(user)
+    }
   },
   mounted() {
     fetch('http://localhost:8080/api/users')

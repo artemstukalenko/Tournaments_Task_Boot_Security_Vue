@@ -41,6 +41,7 @@ export default {
           .then(response => console.log(response))
           .catch(error => console.log(error))
 
+      this.$emit('add-user-to-page', this.formUser)
     }
   }
 }
