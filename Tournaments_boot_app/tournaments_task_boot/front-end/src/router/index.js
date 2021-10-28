@@ -5,6 +5,7 @@ import Roles from '@/views/Roles'
 import Users from "@/views/Users";
 import Players from "@/views/Players";
 import Teams from "@/views/Teams";
+import Teamplayers from "@/views/Teamplayers";
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/teams',
     name: 'Teams',
     component: Teams
+  },
+  {
+    path: '/teamplayers',
+    name: 'Teamplayers',
+    component: Teamplayers
   }
 ]
 
