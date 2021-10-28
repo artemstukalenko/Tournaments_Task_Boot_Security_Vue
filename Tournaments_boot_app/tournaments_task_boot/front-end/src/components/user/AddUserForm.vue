@@ -4,7 +4,7 @@
     <h3>Add user</h3>
 
     <form @submit.prevent="onSubmit">
-      <input type="number" name="roleId" id="roleId" placeholder="User role id" v-model="formUser.userId"/><br/>
+      <input type="number" name="roleId" id="roleId" placeholder="User role id" v-model="formUser.userRole.roleId"/><br/>
       <input type="text" placeholder="User name" v-model="formUser.name"/><br/>
       <input type="text" placeholder="Username" v-model="formUser.username"/><br/>
       <input type="password" placeholder="Password" v-model="formUser.password"/><br/>
@@ -24,7 +24,9 @@ export default {
   data() {
     return {
       formUser: {
-        userId: '',
+        userRole: {
+          roleId: ''
+        },
         name: '',
         username: '',
         password: '',

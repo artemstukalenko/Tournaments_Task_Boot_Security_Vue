@@ -40,11 +40,7 @@ public class UserController {
     @PostMapping("/users")
     public User commitUser(@RequestBody User user) {
 
-        /**
-         * getUserId() actually returns userRoleId
-         * */
-
-        final int roleId = user.getUserId();
+        final int roleId = user.getUserRole().getRoleId();
 
         user.setUserRole(userRoleService.findRoleById(roleId));
 

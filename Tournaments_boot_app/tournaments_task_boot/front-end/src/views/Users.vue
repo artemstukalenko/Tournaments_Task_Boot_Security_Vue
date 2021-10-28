@@ -38,7 +38,7 @@ export default {
 
       fetch(('http://localhost:8080/api/users/' + id), requestOptions)
 
-      this.user = this.users.filter(user => user.userId !== id)
+      this.users = this.users.filter(user => user.userId !== id)
     },
   },
   mounted() {
