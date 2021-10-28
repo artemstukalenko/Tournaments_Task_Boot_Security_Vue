@@ -1,15 +1,13 @@
 <template>
   <div>
-    <h2>ADD ROLE FORM</h2>
     <hr/>
+    <h3>Add role</h3>
 
     <form @submit.prevent="onSubmit">
       <input type="text" v-model="formRole.roleName"/>
       <button type="submit">Confirm</button>
     </form>
 
-    <hr/>
-    <a v-bind:href="/roles/">Cancel</a>
 
   </div>
 

@@ -1,10 +1,10 @@
 package com.artemstukalenko.tournaments_boot.tournaments_task_boot.controller;
 
+
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.UserRoleService;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.UserService;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +40,13 @@ public class UserController {
     @PostMapping("/users")
     public User commitUser(@RequestBody User user) {
 
-        user.setUserRole(userRoleService.findRoleById(user.getUserRole().getRoleId()));
+        /**
+         * getUserId() actually returns userRoleId
+         * */
+
+        final int roleId = user.getUserId();
+
+        user.setUserRole(userRoleService.findRoleById(roleId));
 
         userService.addOrUpdate(user);
 

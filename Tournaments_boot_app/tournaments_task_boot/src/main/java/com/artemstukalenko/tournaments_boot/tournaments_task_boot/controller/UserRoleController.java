@@ -33,7 +33,7 @@ public class UserRoleController {
 
     @PostMapping("/roles")
     public UserRole commitRole(@RequestBody UserRole userRole) {
-        System.out.println("GONNA COMMIT NEW ROLE:         " + userRole);
+
         userRoleService.addOrUpdate(userRole);
 
         return userRole;

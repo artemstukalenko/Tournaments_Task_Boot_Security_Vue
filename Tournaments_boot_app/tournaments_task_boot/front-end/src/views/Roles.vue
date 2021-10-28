@@ -1,16 +1,15 @@
 <template>
   <div>
     <h2>ROLES</h2>
-    <hr/>
 
-    <a v-bind:href="/addRole/">Add new Role</a>
+    <AddRoleForm/>
+
+    <hr/>
 
     <RoleList
     v-bind:rolesList="roles"
     @remove-role="removeRole"
     />
-
-<!--    <AddRoleForm/>-->
   </div>
 
 </template>
