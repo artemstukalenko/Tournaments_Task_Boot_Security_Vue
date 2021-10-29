@@ -1,9 +1,9 @@
 package com.artemstukalenko.tournaments_boot.tournaments_task_boot.security.config;
 
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.controller.authenticate.AuthenticationFilter;
-import com.artemstukalenko.tournaments_boot.tournaments_task_boot.security.handlers.TournamentAuthenticationFailureHandler;
-import com.artemstukalenko.tournaments_boot.tournaments_task_boot.security.handlers.TournamentAuthenticationSuccessHandler;
-import com.artemstukalenko.tournaments_boot.tournaments_task_boot.security.handlers.TournamentLogoutSuccessHandler;
+import com.artemstukalenko.tournaments_boot.tournaments_task_boot.security.handlers.AuthenticationFailureHandler;
+import com.artemstukalenko.tournaments_boot.tournaments_task_boot.security.handlers.AuthenticationSuccessHandler;
+import com.artemstukalenko.tournaments_boot.tournaments_task_boot.security.handlers.LogoutSuccessHandler;
 import com.artemstukalenko.tournaments_boot.tournaments_task_boot.service.UserRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,10 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -69,18 +66,18 @@ public class TournamentSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new TournamentAuthenticationSuccessHandler();
+    public org.springframework.security.web.authentication.AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new AuthenticationSuccessHandler();
     }
 
     @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler() {
-        return new TournamentAuthenticationFailureHandler();
+    public org.springframework.security.web.authentication.AuthenticationFailureHandler authenticationFailureHandler() {
+        return new AuthenticationFailureHandler();
     }
 
     @Bean
-    public LogoutSuccessHandler logoutSuccessHandler() {
-        return new TournamentLogoutSuccessHandler();
+    public org.springframework.security.web.authentication.logout.LogoutSuccessHandler logoutSuccessHandler() {
+        return new LogoutSuccessHandler();
     }
 
     @Override
