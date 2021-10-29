@@ -29,7 +29,7 @@ public class ScheduleController {
     @GetMapping("/schedules")
     public List<Schedule> getAllSchedules(Model model) {
 //        model.addAttribute("allSchedules", scheduleService.getAllSchedules());
-        
+
         return scheduleService.getAllSchedules();
     }
 
